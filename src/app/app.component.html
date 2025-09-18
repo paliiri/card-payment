@@ -1,0 +1,59 @@
+<section class="payment">
+  <div class="container">
+    <div class="payment-form">
+      <form [formGroup]="paymentForm" (ngSubmit)="submitPayment()">
+        <label>
+          <span>Cardholder Name</span>
+          <input type="text" placeholder="Enter name" formControlName="firstName">
+        </label>
+        <label>
+          <span>Card Number</span>
+          <input type="text" placeholder="Enter card number" formControlName="cardNumber"
+            (input)="formatCardNumber($event)">
+        </label>
+        <div class="form-row">
+          <label>
+            <span>Expire Date</span>
+            <input type="text" placeholder="MM/YY" formControlName="expireDate" (input)="formatExpiryDate($event)">
+          </label>
+          <label>
+            <span>CVV</span>
+            <input type="text" placeholder="CVV" formControlName="cvv" (input)="formatCvv($event)"
+              (focus)="flipCard(true)" (blur)="flipCard(false)">
+          </label>
+        </div>
+        <button [disabled]="paymentForm.invalid">Add card</button>
+        <p class="status-message">
+          {{ getErrorMessage() || paymentStatus || '' }}
+        </p>
+      </form>
+      <div class="card-wrapper" [class.flipped]="isFlipped">
+        <div class="card front">
+          <div class="card-top">
+            <div class="card-logo">
+              <ng-container [ngSwitch]="getCardType()">
+                <img *ngSwitchCase="'visa'" src="../assets/image/visa.svg" alt="Visa">
+                <img *ngSwitchCase="'mastercard'" src="../assets/image/mastercard.svg" alt="MasterCard">
+                <img *ngSwitchCase="'mir'" src="../assets/image/mir.svg" alt="Mir">
+                <div *ngSwitchDefault></div>
+              </ng-container>
+            </div>
+          </div>
+          <div class="card-bottom">
+            <div class="card-number">
+              {{ maskCardNumber(cardNumber?.value) }}
+            </div>
+            <div class="card-info">
+              <div class="card-name">{{ firstName?.value || 'CARD HOLDER NAME' }}</div>
+              <div class="card-expiration-date">{{ expireDate?.value || 'MM/YY' }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="card back">
+          <div class="magnet-strip"></div>
+          <div class="cvv-box">{{ cvv?.value || '***' }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

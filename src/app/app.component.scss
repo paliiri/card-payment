@@ -1,0 +1,279 @@
+@import "../assets/style/fonts.scss";
+@import "../assets/style/variables";
+
+.payment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  box-sizing: border-box;
+}
+
+.payment-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 64px;
+  // max-width: 800px;
+  width: fit-content;
+  margin: auto;
+  padding: 86px 32px 32px 32px;
+  background: $neutral-colors-gray-800;
+  border: 1px solid $neutral-colors-gray-700;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 328px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      gap: 4px;
+      position: relative;
+
+      span {
+        font-weight: 600;
+        color: $neutral-colors-gray-200;
+      }
+
+      input {
+        border: 1px solid $neutral-colors-gray-700;
+        border-radius: 4px;
+        padding: 12px;
+        max-width: 328px;
+        width: 100%;
+        height: 48px;
+        background: $neutral-colors-gray-900;
+        font-weight: 400;
+        font-size: 16px;
+        font-family: $font-family;
+        color: $neutral-colors-gray-100;
+        box-sizing: border-box;
+        outline: none;
+
+        &::placeholder {
+          font-family: $font-family;
+          font-weight: 400;
+          font-size: 14px;
+          color: $neutral-colors-gray-400;
+        }
+
+        &:focus {
+          border-color: $brand-colors-brand-color;
+        }
+
+        &.ng-invalid.ng-touched {
+          border-color: $status-colors-status-error;
+          transition: .5s;
+        }
+      }
+
+      .error {
+        position: absolute;
+        bottom: -20px;
+        color: $status-colors-status-error;
+        font-size: 12px;
+        padding-left: 5px;
+      }
+    }
+
+    .form-row {
+      display: flex;
+      gap: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 16px 48px;
+      background: $brand-colors-brand-color;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 18px;
+      color: $neutral-colors-gray-50;
+      transition: 0.3s;
+
+      &:disabled {
+        color: $neutral-colors-gray-900;
+        background: $neutral-colors-gray-300;
+        cursor: not-allowed;
+      }
+
+      &:hover:not(:disabled) {
+        background: $status-colors-status-success;
+        color: $neutral-colors-gray-900;
+      }
+    }
+
+    .status-message {
+      height: 30px;
+      margin: 0;
+      font-weight: 600;
+      // font-size: 14px;
+      line-height: 100%;
+      // color: $neutral-colors-gray-50;
+      color: $status-colors-status-error;
+      text-align: center;
+    }
+  }
+
+  .card-wrapper {
+    perspective: 1000px;
+    width: 300px;
+    height: 180px;
+    position: relative;
+
+    .card {
+      width: 100%;
+      height: 100%;
+      background-image: url(../assets/image/card.png);
+      background-size: cover;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.25);
+      border: 1px solid $neutral-colors-gray-700;
+      backdrop-filter: blur(48px);
+      color: white;
+      padding: 20px;
+      box-sizing: border-box;
+      position: absolute;
+      backface-visibility: hidden;
+      transition: transform 0.8s ease-in-out;
+
+      .card-bottom {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+    }
+
+    .card-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 400;
+      color: $neutral-colors-gray-50;
+      opacity: 0.5;
+    }
+
+    .front {
+      transform: rotateY(0deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between
+    }
+
+    .back {
+      background: #222;
+      transform: rotateY(180deg);
+
+      .magnet-strip {
+        height: 40px;
+        background: #111;
+        margin-bottom: 20px;
+      }
+
+      .cvv-box {
+        background: #fff;
+        color: #000;
+        padding: 5px 10px;
+        border-radius: 4px;
+        text-align: right;
+        font-weight: bold;
+        width: 80px;
+        margin-left: auto;
+      }
+    }
+
+    &.flipped {
+      .front {
+        transform: rotateY(180deg);
+      }
+
+      .back {
+        transform: rotateY(360deg);
+      }
+    }
+
+    .card-logo {
+      height: 32px;
+
+      img {
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+}
+
+@media (max-width: 950px) {
+  .payment-form {
+    flex-direction: column-reverse;
+
+  }
+}
+
+@media (max-width: 460px) {
+  .payment-form {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+}
+
+@media (max-width: 390px) {
+  .payment-form {
+    gap: 10px;
+    width: 100%;
+
+    .card-wrapper {
+      width: 224px;
+      font-size: 13px;
+
+      .card-info {
+        align-items: flex-start;
+        flex-direction: column;
+        font-size: 11px;
+      }
+
+      .card {
+        height: auto;
+      }
+
+    }
+
+    form {
+      width: 240px;
+      gap: 15px;
+
+      label input {
+        font-size: 12px;
+
+        &::placeholder {
+          font-size: 12px;
+        }
+      }
+
+
+      button {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+}

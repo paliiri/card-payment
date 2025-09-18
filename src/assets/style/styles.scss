@@ -1,0 +1,36 @@
+@import "variables";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: $neutral-colors-gray-900;
+  height: 100%;
+  font-size: 14px;
+  font-family: $font-family;
+}
+
+@media (max-width: 460px) {
+  body {
+    background: $neutral-colors-gray-800;
+  }
+}
+
+@media (max-width: 390px) {
+  body {
+    font-size: 12px;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1230px;
+  margin: 0 auto;
+  padding: 30px;
+}
