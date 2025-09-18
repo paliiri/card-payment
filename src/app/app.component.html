@@ -24,7 +24,8 @@
         </div>
         <button [disabled]="paymentForm.invalid">Add card</button>
         <p class="status-message">
-          {{ getErrorMessage() || paymentStatus || '' }}
+          <span *ngIf="getErrorMessage()" class="error">{{ getErrorMessage() }}</span>
+          <span *ngIf="!getErrorMessage() && paymentStatus" class="success">{{ paymentStatus }}</span>
         </p>
       </form>
       <div class="card-wrapper" [class.flipped]="isFlipped">

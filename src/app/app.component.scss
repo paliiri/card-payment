@@ -120,13 +120,21 @@
       // font-size: 14px;
       line-height: 100%;
       // color: $neutral-colors-gray-50;
-      color: $status-colors-status-error;
+      // color: $status-colors-status-error;
       text-align: center;
+
+      .error {
+        color: $status-colors-status-error;
+      }
+
+      .success {
+        color: $neutral-colors-gray-50;
+      }
     }
   }
 
   .card-wrapper {
-    perspective: 1000px;
+    // perspective: 1000px;
     width: 300px;
     height: 180px;
     position: relative;
