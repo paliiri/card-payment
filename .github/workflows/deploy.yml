@@ -1,0 +1,36 @@
+name: Deploy Angular app to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main   # 🚨 замени на default-ветку, если у тебя не main, а master
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Клонируем репозиторий
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Ставим Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # 3️⃣ Устанавливаем зависимости
+      - name: Install dependencies
+        run: npm install
+
+      # 4️⃣ Собираем Angular (используется "build" из package.json)
+      - name: Build Angular app
+        run: npm run build
+
+      # 5️⃣ Деплой на GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages  # ветка, куда зальётся сборка
+          folder: dist/card-payment # ⚠️ имя должно совпадать с "outputPath" из angular.json
