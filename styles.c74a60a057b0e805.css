@@ -1,0 +1,1 @@
+*,*:before,*:after{box-sizing:border-box}body{margin:0;padding:0;box-sizing:border-box;background-color:#111827;height:100%;font-size:14px;font-family:Source Sans Pro,sans-serif}@media (max-width: 460px){body{background:#1f2937}}@media (max-width: 390px){body{font-size:12px}}.container{width:100%;max-width:1230px;margin:0 auto;padding:30px}
